@@ -20,14 +20,14 @@ float LINE_SELECT_THRESHOLD = 0.03f;
 
 void screen2world(float xs, float ys, float& xw, float& yw)
 {
-    float aspect = (float)screenW/screenH;
+    float aspect = (float)screenW / screenH;
     xw = 2.0f * (xs / (screenW - 1) - 0.5f) * aspect;
     yw = -2.0f * (ys / (screenH - 1) - 0.5f);
 }
 
 // 두 점 사이의 거리 계산
 float distance(float x1, float y1, float x2, float y2) {
-    return sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
+    return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
 // 점과 선분 사이의 거리 계산
@@ -39,7 +39,7 @@ float pointToLineDistance(float px, float py, float x1, float y1, float x2, floa
 
     float dot = A * C + B * D;
     float len_sq = C * C + D * D;
-    
+
     float param = -1;
     if (len_sq != 0)
         param = dot / len_sq;
@@ -143,23 +143,23 @@ void keyboard(GLFWwindow* window, int key, int scancode, int action, int mods)
     {
         switch (key)
         {
-            case GLFW_KEY_Q:
-            case GLFW_KEY_ESCAPE:
-                glfwSetWindowShouldClose(window, GL_TRUE);
-                break;
+        case GLFW_KEY_Q:
+        case GLFW_KEY_ESCAPE:
+            glfwSetWindowShouldClose(window, GL_TRUE);
+            break;
 
-            case GLFW_KEY_DELETE:
-            case GLFW_KEY_BACKSPACE:
-                if (selectedPoint >= 0 && selectedPoint < points.size()) {
-                    points.erase(points.begin() + selectedPoint);
-                    selectedPoint = -1;
-                }
-                break;
-
-            case GLFW_KEY_C:
-                points.clear();
+        case GLFW_KEY_DELETE:
+        case GLFW_KEY_BACKSPACE:
+            if (selectedPoint >= 0 && selectedPoint < points.size()) {
+                points.erase(points.begin() + selectedPoint);
                 selectedPoint = -1;
-                break;
+            }
+            break;
+
+        case GLFW_KEY_C:
+            points.clear();
+            selectedPoint = -1;
+            break;
         }
     }
 }
